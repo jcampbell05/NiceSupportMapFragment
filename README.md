@@ -16,11 +16,11 @@ Install
 
 1. Add NiceSupportMapFragment.jar to your Android Project's Lib Directory.
 2. Replace your Fragment code in your Layout to use this class.
-    &gt;fragment
-          android:id="@+id/map"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:name="com.NyxDigital.NiceSupportMapFragment"/&lt;
+    &lt;fragment
+    android:id="@+id/map"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:name="com.NyxDigital.NiceSupportMapFragment"/&gt;
 
 3. Replace all references to the Fragment in your code to use this class.
     NiceSupportMapFragment mapFragment = (NiceSupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);

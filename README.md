@@ -16,6 +16,7 @@ Install
 
 1. Add NiceSupportMapFragment.jar to your Android Project's Lib Directory.
 2. Replace your Fragment code in your Layout to use this class.
+
     &lt;fragment
     android:id="@+id/map"
     android:layout_width="match_parent"

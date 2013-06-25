@@ -1,15 +1,19 @@
-package com.NyxDigital;
+package com.NYXDigital;
 
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 
 import com.google.android.gms.maps.SupportMapFragment;
 
 public class NiceSupportMapFragment extends SupportMapFragment {
+	
+	private boolean preventParentScrolling = true;
     
     private SurfaceView searchAndFindSurfaceView(ViewGroup group){
     	int childCount = group.getChildCount();
@@ -40,10 +44,27 @@ public class NiceSupportMapFragment extends SupportMapFragment {
 			if (surfaceView != null) { //We should get a surface view but check just in case we don't
 				surfaceView.setBackgroundColor(0x00000000);  // set background to transparent
 			}
-		
+			
+			//Stop Containing Views from moving when a user is interacting with Map View Directly
+			surfaceView.setOnTouchListener(new OnTouchListener(){
+				public boolean onTouch(View view, MotionEvent event) {
+					view.getParent().requestDisallowInterceptTouchEvent(preventParentScrolling);
+		            return false;
+				}
+			});
 		}
 		
+		
+		
 		return view;
+	}
+	
+	public boolean getPreventParentScrolling(){
+		return preventParentScrolling;
+	}
+	
+	public void setPreventParentScrolling(boolean value){
+		preventParentScrolling = value;
 	}
 
 }

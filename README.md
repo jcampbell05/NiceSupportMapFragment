@@ -38,7 +38,7 @@ We also add support for allowing user's to vertical and horizontal pan a map whe
 License
 -------
 
-    Copyright 2013 James Campbell
+    Copyright 2013 Nyx Digital
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.

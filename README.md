@@ -5,16 +5,16 @@ If you've used the SupportMapFragment on older Android devices then you know how
 
 The reason behind this is that the Map uses a SurfaceView, when the App creates this view it creates a Window behind your activity's and punches a hole meaning things in your activity's window cannot seen underneath the SurfaceView's original location. 
 
-Whilst there may be a plethora of fixes for this none of them are quick and easy.  But until google fix it the quick and easy way is to use this small replacement class that handles making sure that no black boxes are left behind. Although still very janky, it works and is reccomended for anyone who uses Google Maps SDK v2 on older devices.
+Whilst there may be a plethora of fixes for this, none of them are quick and easy.  But until google fix it the quick and easy way is to use this small replacement class that handles making sure that no black boxes are left behind. Although still very janky, it works and is reccomended for anyone who uses Google Maps SDK v2 on older devices.
 
 We love all the amazing work you Android Devlopers give to the Open Source Community so this is our small way of giving somthing back.
 
-Original Fix which this Class is based upon -  https://github.com/jfeinstein10/SlidingMenu/issues/168
+All pull requests welcome, Original Fix which this Class is based upon -  https://github.com/jfeinstein10/SlidingMenu/issues/168
 
 Install
 -------
 
-1. Add NiceSupportMapFragment.jar to Project's Lib Directory.
+1. Add NiceSupportMapFragment.jar to your Android Project's Lib Directory.
 2. Replace your Fragment code in your Layout to use this class.
     <fragment
           android:id="@+id/map"

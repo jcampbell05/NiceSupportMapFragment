@@ -35,26 +35,25 @@ public class NiceSupportMapFragment extends SupportMapFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		ViewGroup view = (ViewGroup)super.onCreateView(inflater, container, savedInstanceState);
 		
+		SurfaceView surfaceView = searchAndFindSurfaceView(view); //Find the surface view
+		
 		// Janky "fix" to prevent artefacts when embedding GoogleMaps in a sliding view.
 	    // https://github.com/jfeinstein10/SlidingMenu/issues/168
 		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB ) {
-			
-			SurfaceView surfaceView = searchAndFindSurfaceView(view); //Find the surface view
 			
 			if (surfaceView != null) { //We should get a surface view but check just in case we don't
 				surfaceView.setBackgroundColor(0x00000000);  // set background to transparent
 			}
 			
-			//Stop Containing Views from moving when a user is interacting with Map View Directly
-			surfaceView.setOnTouchListener(new OnTouchListener(){
-				public boolean onTouch(View view, MotionEvent event) {
-					view.getParent().requestDisallowInterceptTouchEvent(preventParentScrolling);
-		            return false;
-				}
-			});
 		}
 		
-		
+		//Stop Containing Views from moving when a user is interacting with Map View Directly
+		surfaceView.setOnTouchListener(new OnTouchListener(){
+			public boolean onTouch(View view, MotionEvent event) {
+				view.getParent().requestDisallowInterceptTouchEvent(preventParentScrolling);
+	            return false;
+			}
+		});
 		
 		return view;
 	}

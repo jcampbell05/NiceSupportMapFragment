@@ -11,7 +11,7 @@ We love all the amazing work you Android Devlopers give to the Open Source Commu
 
 All pull requests welcome.
 
-Original Fix which this Class is based upon
+Original Fix which this Class is based upon -
 https://github.com/jfeinstein10/SlidingMenu/issues/168#issuecomment-11834105
 
 Install

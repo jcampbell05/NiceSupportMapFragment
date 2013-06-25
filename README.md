@@ -28,8 +28,8 @@ Install
 
 4. Build and Run - It should just work, *phew* that was easy!
 
-We also have support for allowing user's to vertical and horizontal pan a map when it is placed inside of a view that also uses these gestures i.e Scroll Views. This behaviour is enabled by default but to turn it off just set the preventParentScrolling variable to false.
-   mapFragment.setPreventParentScrolling(false;)
+We also add support for allowing user's to vertical and horizontal pan a map when it is placed inside of a view that also uses these gestures i.e Scroll Views. This behaviour is enabled by default but to turn it off just set the preventParentScrolling variable to false.
+   mapFragment.setPreventParentScrolling(false);
 
 
 License

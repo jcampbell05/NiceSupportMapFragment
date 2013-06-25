@@ -7,7 +7,7 @@ The reason behind this is that the Map uses a SurfaceView, when the App creates 
 
 Whilst there may be a plethora of fixes for this, none of them are quick or easy. Whilst it would be amazing if google could fix it, for now the quick and easy way is to use this small replacement class that handles making sure that no black boxes are left behind. Although still very janky, it works and is reccomended for anyone who uses Google Maps SDK v2 on older devices.
 
-We love all the amazing work you Android Developers give to the Open Source Community so this is our small way of giving somthing back.
+We love all the amazing work you Android Developers give to the Open Source Community so this is our small way of giving something back.
 
 Original Fix which this Class is based upon -  https://github.com/jfeinstein10/SlidingMenu/issues/168
 

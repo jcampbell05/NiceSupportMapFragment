@@ -1,5 +1,6 @@
 package com.NyxDigital;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.SurfaceView;
@@ -15,7 +16,11 @@ public class NiceSupportMapFragment extends SupportMapFragment {
         for (int i = 0; i < childCount; i++) {
             View child = group.getChildAt(i);
             if (child instanceof ViewGroup) {
-                return searchAndFindSurfaceView((ViewGroup) child);
+            	SurfaceView surfaceView = searchAndFindSurfaceView((ViewGroup) child);
+            	
+            	if (surfaceView != null) {
+            		return surfaceView;
+            	}
             } else if (child instanceof SurfaceView) {
                 return (SurfaceView) child;
             }
@@ -28,11 +33,14 @@ public class NiceSupportMapFragment extends SupportMapFragment {
 		
 		// Janky "fix" to prevent artefacts when embedding GoogleMaps in a sliding view.
 	    // https://github.com/jfeinstein10/SlidingMenu/issues/168
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB ) {
+			
+			SurfaceView surfaceView = searchAndFindSurfaceView(view); //Find the surface view
+			
+			if (surfaceView != null) { //We should get a surface view but check just in case we don't
+				surfaceView.setBackgroundColor(0x00000000);  // set background to transparent
+			}
 		
-		SurfaceView surfaceView = searchAndFindSurfaceView(view); //Find the surface view
-		
-		if (surfaceView != null) { //We should get a surface view but check just in case we don't
-			surfaceView.setBackgroundColor(0x00000000);  // set background to transparent
 		}
 		
 		return view;

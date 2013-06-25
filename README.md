@@ -9,7 +9,10 @@ Whilst there may be a plethora of fixes for this, none of them are quick and eas
 
 We love all the amazing work you Android Devlopers give to the Open Source Community so this is our small way of giving somthing back.
 
-All pull requests welcome, Original Fix which this Class is based upon -  https://github.com/jfeinstein10/SlidingMenu/issues/168
+All pull requests welcome.
+
+Original Fix which this Class is based upon
+https://github.com/jfeinstein10/SlidingMenu/issues/168#issuecomment-11834105
 
 Install
 -------

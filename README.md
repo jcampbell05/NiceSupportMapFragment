@@ -23,11 +23,6 @@ Install
     android:layout_height="match_parent"
     android:name="com.NyxDigital.NiceSupportMapFragment"/&gt;
 
-3. Replace all references to the Fragment in your code to use this class.
-    NiceSupportMapFragment mapFragment = (NiceSupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-    GoogleMap mMap = mapFragment.getMap();
-
-4. Build and Run - It should just work, *phew* that was easy!
 
 
 License

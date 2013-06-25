@@ -7,7 +7,7 @@ The reason behind this is that the Map uses a SurfaceView, when the App creates 
 
 Whilst there may be a plethora of fixes for this, none of them are quick or easy. Whilst it would be amazing if google could fix it, for now the quick and easy way is to use this small replacement class that handles making sure that no black boxes are left behind. Although still very janky, it works and is reccomended for anyone who uses Google Maps SDK v2 on older devices.
 
-In addition to that we also implemented some additional tweaks to help reduce the black flicker bug that occurs when a MapView is created (due to it using the SurfaceView).
+In addition to that we also implemented some additional tweaks to help reduce the black flicker bug that occurs when a MapView is created (due to it using the SurfaceView), in some cases we've managed to make it not flicker at all.
 
 We love all the amazing work you Android Developers give to the Open Source Community so this is our small way of giving something back.
 

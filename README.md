@@ -17,15 +17,15 @@ Install
 1. Add NiceSupportMapFragment.jar to your Android Project's Lib Directory.
 2. Replace your Fragment code in your Layout to use this class.
 
-    &lt;fragment
-    android:id="@+id/map"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:name="com.NyxDigital.NiceSupportMapFragment"/&gt;
+        &lt;fragment
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="com.NyxDigital.NiceSupportMapFragment"/&gt;
 
 3. Replace all references to the Fragment in your code to use this class.
-    NiceSupportMapFragment mapFragment = (NiceSupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-    GoogleMap mMap = mapFragment.getMap();
+        NiceSupportMapFragment mapFragment = (NiceSupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        GoogleMap mMap = mapFragment.getMap();
 
 4. Build and Run - It should just work, *phew* that was easy!
 

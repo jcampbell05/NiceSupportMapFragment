@@ -9,7 +9,7 @@ Whilst there may be a plethora of fixes for this, none of them are quick or easy
 
 In addition to that we also implemented some additional tweaks to help reduce the black flicker bug that occurs when a MapView is created (due to it using the SurfaceView), in some cases we've managed to make it not flicker at all.
 
-And finally we have a way of disabling that annoying quirk where a map view in a containing view like a scroll view would have it's gestures swalloed so a user couldn't pan the view, we automatically stop this from happening but you can opt-out of this behaviour (see below)
+And finally we have a way of disabling that annoying quirk where a MapView in a containing view like a ScrollView would have it's gestures swallowed so a user couldn't pan the MapView, we automatically stop this from happening but you can opt-out of this behaviour (see below)
 
 We love all the amazing work you Android Developers give to the Open Source Community so this is our small way of giving something back.
 

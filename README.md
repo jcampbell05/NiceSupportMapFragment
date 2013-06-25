@@ -3,9 +3,11 @@ NiceSupportMapFragment
 
 If you've used the SupportMapFragment on older Android devices then you know how annoying it can be when it leaves a black box whenever you scroll a ListView, ScrollView or a ViewPager.
 
-The reason behind this is that the Map uses a SurfaceView, when the App creates this view it creates a Window behind your activity's and punches a hole meaning things in your activity's window cannot seen underneath the SurfaceView's original location. 
+The reason behind this is that the Map uses a SurfaceView, when the App creates this view it creates a Window behind your Activity's and punches a hole meaning things in your Activity's window cannot seen underneath the SurfaceView's original location. 
 
 Whilst there may be a plethora of fixes for this, none of them are quick or easy. Whilst it would be amazing if google could fix it, for now the quick and easy way is to use this small replacement class that handles making sure that no black boxes are left behind. Although still very janky, it works and is reccomended for anyone who uses Google Maps SDK v2 on older devices.
+
+In addition to that we also implemented some additional tweaks to help reduce the black flicker bug that occurs when a MapView is created (due to it using the SurfaceView).
 
 We love all the amazing work you Android Developers give to the Open Source Community so this is our small way of giving something back.
 
@@ -33,7 +35,6 @@ Install
 We also have support for allowing user's to vertical and horizontal pan a map when it is placed inside of a view that also uses these gestures i.e Scroll Views, where normally if you tried to pan the map the scroll view would move. This behaviour is enabled by default but to turn it off just set preventParentScrolling to false.
        
        mapFragment.setPreventParentScrolling(false);
-
 
 License
 -------

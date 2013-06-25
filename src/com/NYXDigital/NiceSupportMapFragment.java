@@ -1,9 +1,11 @@
 package com.NYXDigital;
 
+import android.graphics.PixelFormat;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
+import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnTouchListener;
@@ -34,6 +36,7 @@ public class NiceSupportMapFragment extends SupportMapFragment {
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		ViewGroup view = (ViewGroup)super.onCreateView(inflater, container, savedInstanceState);
+		view.setBackgroundColor(0x00000000); //Set Root View to be transparent to prevent black screen on load
 		
 		SurfaceView surfaceView = searchAndFindSurfaceView(view); //Find the surface view
 		
@@ -43,6 +46,11 @@ public class NiceSupportMapFragment extends SupportMapFragment {
 			
 			if (surfaceView != null) { //We should get a surface view but check just in case we don't
 				surfaceView.setBackgroundColor(0x00000000);  // set background to transparent
+				
+				//Fix for reducing black view flash issue
+				surfaceView.setZOrderMediaOverlay(true); 
+				SurfaceHolder holder = surfaceView.getHolder();
+				holder.setFormat(PixelFormat.RGBA_8888);
 			}
 			
 		}

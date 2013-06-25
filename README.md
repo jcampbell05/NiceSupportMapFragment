@@ -14,7 +14,7 @@ Original Fix which this Class is based upon -  https://github.com/jfeinstein10/S
 Install
 -------
 
-1. Add NiceSupportMapFragment.jar to Project's Lib Directory.
+1. Add NiceSupportMapFragment.jar to Project's Lib Directory. Download it here: https://github.com/NyxDigital/NiceSupportMapFragment/blob/master/NiceSupportMapFragment.jar
 2. Replace your Fragment code in your Layout to use this class.
     <fragment
           android:id="@+id/map"

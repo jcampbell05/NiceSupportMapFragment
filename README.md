@@ -38,7 +38,7 @@ We also have support for allowing user's to vertical and horizontal pan a map wh
        
        mapFragment.setPreventParentScrolling(false);
 
-If you want to completly stop the black flicker on older devices then we have support for the ZOrderonTop fix, warning though this will cause the view to overlap all view including your app chrome (i.e the actionbar). This behaviour is disabled by default but to opt in simple set useZOnTopFix to true.
+If you want to completly stop the black flicker on older devices then we have support for the ZOrderOnTop fix, warning though this will cause the view to overlap all view including your app chrome (i.e the actionbar). This behaviour is disabled by default but to opt in simple set useZOnTopFix to true.
 
        mapFragment.useZOnTopFix(true);
 

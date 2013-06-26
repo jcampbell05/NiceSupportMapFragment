@@ -24,7 +24,7 @@ public class NiceSupportMapFragment extends SupportMapFragment {
 	private boolean textureViewSupport() {
 		boolean exist = true;
 		try {
-			Class.forName("android.app.ActionBar");
+			Class.forName("android.view.TextureView");
 		} catch (ClassNotFoundException e) {
 			exist = false;
 		}
@@ -62,21 +62,15 @@ public class NiceSupportMapFragment extends SupportMapFragment {
 
 		ViewGroup view = (ViewGroup) super.onCreateView(inflater, container,
 				savedInstanceState);
-		view.setBackgroundColor(0x00000000); // Set Root View to be transparent
-												// to prevent black screen on
-												// load
+		view.setBackgroundColor(0x00000000); // Set Root View to be transparent to prevent black screen on load
 
-		hasTextureViewSupport = textureViewSupport(); // Find out if we support
-														// texture view on this
-														// device
-
-		drawingView = searchAndFindDrawingView(view); // Find the view the map
-														// is using
+		hasTextureViewSupport = textureViewSupport(); // Find out if we support texture view on this device
+		drawingView = searchAndFindDrawingView(view); // Find the view the map is using for Open GL
 
 		if (drawingView == null)
 			return view; // If we didn't get anything then abort
+		
 		// texture view
-
 		if (hasTextureViewSupport) { // If we support texture view and the
 										// drawing view is a TextureView then
 										// tweak it and return the fragment view
@@ -104,22 +98,18 @@ public class NiceSupportMapFragment extends SupportMapFragment {
 		final SurfaceView surfaceView = (SurfaceView) drawingView;
 
 		if (useZOnTopFix) {
-			surfaceView.setZOrderOnTop(true); // Optional fix for flicker, works
-												// but can cause isues
+			surfaceView.setZOrderOnTop(true); // Optional fix for flicker, works but can cause overlapping issues
 		}
 
-		// Janky "fix" to prevent artefacts when embedding GoogleMaps in a
+		// Janky "fix" to prevent artifacts when embedding GoogleMaps in a
 		// sliding view on older devices.
 		// https://github.com/jfeinstein10/SlidingMenu/issues/168
 
-		if (surfaceView != null) {
+		// Fix for reducing black view flash issues
+		surfaceView.setZOrderMediaOverlay(true);
 
-			// Fix for reducing black view flash issues
-			surfaceView.setZOrderMediaOverlay(true);
-
-			SurfaceHolder holder = surfaceView.getHolder();
-			holder.setFormat(PixelFormat.RGB_565);
-		}
+		SurfaceHolder holder = surfaceView.getHolder();
+		holder.setFormat(PixelFormat.RGB_565);
 
 		// Stop Containing Views from moving when a user is interacting with
 		// Map View Directly

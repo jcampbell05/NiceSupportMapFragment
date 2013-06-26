@@ -7,9 +7,9 @@ The reason behind this is that the Map uses a SurfaceView, when the App creates 
 
 Whilst there may be a plethora of fixes for this, none of them are quick or easy. Whilst it would be amazing if google could fix it, for now the quick and easy way is to use this small replacement class that handles making sure that no black boxes are left behind. Although still very janky, it works and is reccomended for anyone who uses Google Maps SDK v2 on older devices.
 
-In addition to that we also implemented some additional tweaks to help reduce the black flicker bug that occurs when a MapView is created (due to it using the SurfaceView), in some cases we've managed to make it not flicker at all.
+In addition to that we also implemented some additional tweaks to help reduce the black flicker bug that occurs when a MapView is created (due to it using the SurfaceView), in some cases we've managed to make it not flicker at all. 
 
-And finally we have a way of disabling that annoying quirk where a MapView in a containing view like a ScrollView would have it's gestures swallowed so a user couldn't pan the MapView, we automatically stop this from happening but you can opt-out of this behaviour (see below)
+And finally we have a way of disabling that annoying quirk where a MapView in a containing view like a ScrollView would have it's gestures swallowed so a user couldn't pan the MapView, we automatically stop this from happening but you can opt-out of this behaviour (see below). We fully support TextureView on newer devices as well for this behavior.
 
 We love all the amazing work you Android Developers give to the Open Source Community so this is our small way of giving something back.
 
@@ -37,6 +37,10 @@ Install
 We also have support for allowing user's to vertical and horizontal pan a map when it is placed inside of a view that also uses these gestures i.e Scroll Views, where normally if you tried to pan the map the scroll view would move. This behaviour is enabled by default but to turn it off just set preventParentScrolling to false.
        
        mapFragment.setPreventParentScrolling(false);
+
+If you want to completly stop the black flicker on older devices then we have support for the ZOrderonTop fix, warning though this will cause the view to overlap all view including your app chrome (i.e the actionbar). This behaviour is disabled by default but to opt in simple set useZOnTopFix to true.
+
+       mapFragment.useZOnTopFix(true);
 
 License
 -------

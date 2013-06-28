@@ -19,7 +19,6 @@ public class NiceSupportMapFragment extends SupportMapFragment {
 	private View drawingView;
 	private boolean hasTextureViewSupport = false;
 	private boolean preventParentScrolling = true;
-	private boolean useZOnTopFix = false;
 
 	private boolean textureViewSupport() {
 		boolean exist = true;
@@ -39,7 +38,7 @@ public class NiceSupportMapFragment extends SupportMapFragment {
 				View view = searchAndFindDrawingView((ViewGroup) child);
 
 				if (view != null) {
-					return view;
+					return view; 
 				}
 			}
 
@@ -67,8 +66,9 @@ public class NiceSupportMapFragment extends SupportMapFragment {
 		hasTextureViewSupport = textureViewSupport(); // Find out if we support texture view on this device
 		drawingView = searchAndFindDrawingView(view); // Find the view the map is using for Open GL
 
-		if (drawingView == null)
-			return view; // If we didn't get anything then abort
+		if (drawingView == null) return view; // If we didn't get anything then abort
+		
+		drawingView.setBackgroundColor(0x00000000); // Stop black artifact from being left behind on scroll
 		
 		// texture view
 		if (hasTextureViewSupport) { // If we support texture view and the
@@ -97,19 +97,9 @@ public class NiceSupportMapFragment extends SupportMapFragment {
 		// Otherwise continue onto legacy surface view hack
 		final SurfaceView surfaceView = (SurfaceView) drawingView;
 
-		if (useZOnTopFix) {
-			surfaceView.setZOrderOnTop(true); // Optional fix for flicker, works but can cause overlapping issues
-		}
-
-		// Janky "fix" to prevent artifacts when embedding GoogleMaps in a
-		// sliding view on older devices.
-		// https://github.com/jfeinstein10/SlidingMenu/issues/168
-
 		// Fix for reducing black view flash issues
-		surfaceView.setZOrderMediaOverlay(true);
-
 		SurfaceHolder holder = surfaceView.getHolder();
-		holder.setFormat(PixelFormat.RGB_565);
+		holder.setFormat(PixelFormat.RGB_888);
 
 		// Stop Containing Views from moving when a user is interacting with
 		// Map View Directly
@@ -130,14 +120,6 @@ public class NiceSupportMapFragment extends SupportMapFragment {
 
 	public void setPreventParentScrolling(boolean value) {
 		preventParentScrolling = value;
-	}
-
-	public boolean isUseZOnTopFix() {
-		return useZOnTopFix;
-	}
-
-	public void setUseZOnTopFix(boolean useZOnTopFix) {
-		this.useZOnTopFix = useZOnTopFix;
 	}
 
 }

@@ -38,7 +38,7 @@ public class NiceSupportMapFragment extends SupportMapFragment {
 				View view = searchAndFindDrawingView((ViewGroup) child);
 
 				if (view != null) {
-					return view; 
+					return view;
 				}
 			}
 
@@ -61,15 +61,50 @@ public class NiceSupportMapFragment extends SupportMapFragment {
 
 		ViewGroup view = (ViewGroup) super.onCreateView(inflater, container,
 				savedInstanceState);
-		view.setBackgroundColor(0x00000000); // Set Root View to be transparent to prevent black screen on load
+		view.setBackgroundColor(0x00000000); // Set Root View to be transparent
+												// to prevent black screen on
+												// load
 
-		hasTextureViewSupport = textureViewSupport(); // Find out if we support texture view on this device
-		drawingView = searchAndFindDrawingView(view); // Find the view the map is using for Open GL
+		hasTextureViewSupport = textureViewSupport(); // Find out if we support
+														// texture view on this
+														// device
+		drawingView = searchAndFindDrawingView(view); // Find the view the map
+														// is using for Open GL
 
-		if (drawingView == null) return view; // If we didn't get anything then abort
-		
-		drawingView.setBackgroundColor(0x00000000); // Stop black artifact from being left behind on scroll
-		
+		if (drawingView == null)
+			return view; // If we didn't get anything then abort
+
+		drawingView.setBackgroundColor(0x00000000); // Stop black artifact from
+													// being left behind on
+													// scroll
+
+		// Create On Touch Listener for MapView Parent Scrolling Fix
+		OnTouchListener touchListener = new OnTouchListener() {
+			public boolean onTouch(View view, MotionEvent event) {
+
+				int action = event.getAction();
+
+				switch (action) {
+
+				case MotionEvent.ACTION_DOWN:
+					// Disallow Parent to intercept touch events.
+					view.getParent().requestDisallowInterceptTouchEvent(
+							preventParentScrolling);
+					break;
+
+				case MotionEvent.ACTION_UP:
+					// Allow Parent to intercept touch events.
+					view.getParent().requestDisallowInterceptTouchEvent(false);
+					break;
+
+				}
+
+				// Handle View touch events.
+				view.onTouchEvent(event);
+				return true;
+			}
+		};
+
 		// texture view
 		if (hasTextureViewSupport) { // If we support texture view and the
 										// drawing view is a TextureView then
@@ -81,13 +116,7 @@ public class NiceSupportMapFragment extends SupportMapFragment {
 
 				// Stop Containing Views from moving when a user is interacting
 				// with Map View Directly
-				textureView.setOnTouchListener(new OnTouchListener() {
-					public boolean onTouch(View view, MotionEvent event) {
-						view.getParent().requestDisallowInterceptTouchEvent(
-								preventParentScrolling);
-						return false;
-					}
-				});
+				textureView.setOnTouchListener(touchListener);
 
 				return view;
 			}
@@ -103,13 +132,7 @@ public class NiceSupportMapFragment extends SupportMapFragment {
 
 		// Stop Containing Views from moving when a user is interacting with
 		// Map View Directly
-		surfaceView.setOnTouchListener(new OnTouchListener() {
-			public boolean onTouch(View view, MotionEvent event) {
-				view.getParent().requestDisallowInterceptTouchEvent(
-						preventParentScrolling);
-				return false;
-			}
-		});
+		surfaceView.setOnTouchListener(touchListener);
 
 		return view;
 	}

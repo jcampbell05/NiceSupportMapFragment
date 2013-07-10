@@ -89,7 +89,7 @@ public class NiceSupportMapFragment extends SupportMapFragment {
 				case MotionEvent.ACTION_DOWN:
 					// Disallow Parent to intercept touch events.
 					view.getParent().requestDisallowInterceptTouchEvent(
-							preventParentScrolling);
+							true);
 					break;
 
 				case MotionEvent.ACTION_UP:
@@ -101,7 +101,7 @@ public class NiceSupportMapFragment extends SupportMapFragment {
 
 				// Handle View touch events.
 				view.onTouchEvent(event);
-				return true;
+				return false;
 			}
 		};
 

@@ -78,7 +78,7 @@ public class NiceSupportMapFragment extends SupportMapFragment {
 													// being left behind on
 													// scroll
 
-		// Create On Touch Listener for MapView Parent Scrolling Fix
+		// Create On Touch Listener for MapView Parent Scrolling Fix - Many thanks to Gemerson Ribas (gmribas) for help with this fix.
 		OnTouchListener touchListener = new OnTouchListener() {
 			public boolean onTouch(View view, MotionEvent event) {
 

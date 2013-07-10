@@ -15,6 +15,8 @@ We love all the amazing work you Android Developers give to the Open Source Comm
 
 Original Fix which this Class is based upon -  https://github.com/jfeinstein10/SlidingMenu/issues/168
 
+Special thanks to to Gemerson Ribas (gmribas) for his help.
+
 Install
 -------
 

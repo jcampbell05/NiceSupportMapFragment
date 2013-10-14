@@ -13,6 +13,8 @@ And finally we have a way of disabling that annoying quirk where a MapView in a 
 
 We love all the amazing work you Android Developers give to the Open Source Community so this is our small way of giving something back.
 
+Recommended for Android 2.3 and Above
+
 Original Fix which this Class is based upon -  https://github.com/jfeinstein10/SlidingMenu/issues/168
 
 Special thanks to to Gemerson Ribas (gmribas) for his help.

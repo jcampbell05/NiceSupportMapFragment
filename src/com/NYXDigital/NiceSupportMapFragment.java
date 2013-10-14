@@ -126,7 +126,7 @@ public class NiceSupportMapFragment extends SupportMapFragment {
 
 		// Fix for reducing black view flash issues
 		SurfaceHolder holder = surfaceView.getHolder();
-		holder.setFormat(PixelFormat.RGB_888);
+		holder.setFormat(PixelFormat.TRANSLUCENT);
 
 		// Stop Containing Views from moving when a user is interacting with
 		// Map View Directly

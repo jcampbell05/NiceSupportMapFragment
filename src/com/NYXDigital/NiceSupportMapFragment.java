@@ -26,6 +26,7 @@ public class NiceSupportMapFragment extends SupportMapFragment {
 	//Many thanks to Pepsi1x1 for his contribution to this Texture View detection flag
 	private boolean hasTextureViewSupport = android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN;
 	private boolean isRGBA_8888ByDefault = android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1;
+	private boolean supportsTextureViewBackground = android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.N;
 	
 	private boolean preventParentScrolling = true;
 
@@ -82,24 +83,25 @@ public class NiceSupportMapFragment extends SupportMapFragment {
 
 		ViewGroup view = (ViewGroup) super.onCreateView(inflater, container,
 				savedInstanceState);
-		
-		//Transparent Color For Views, android.R.color.transparent dosn't work on all devices
-		int transparent =  0x00000000;
-
-		view.setBackgroundColor(transparent); // Set Root View to be
-												// transparent
-												// to prevent black screen on
-												// load
-	
 		drawingView = searchAndFindDrawingView(view); // Find the view the map
 														// is using for Open GL
 
-		if (drawingView == null)
-			return view; // If we didn't get anything then abort
+		if (supportsTextureViewBackground) {
+			//Transparent Color For Views, android.R.color.transparent dosn't work on all devices
+			int transparent =  0x00000000;
 
-		drawingView.setBackgroundColor(transparent); // Stop black artifact from
-													// being left behind on
-													// scroll
+			view.setBackgroundColor(transparent); // Set Root View to be
+													// transparent
+													// to prevent black screen on
+													// load
+		
+			if (drawingView == null)
+				return view; // If we didn't get anything then abort
+
+			drawingView.setBackgroundColor(transparent); // Stop black artifact from
+														// being left behind on
+														// scroll
+		}
 
 		// Create On Touch Listener for MapView Parent Scrolling Fix - Many
 		// thanks to Gemerson Ribas (gmribas) for help with this fix.

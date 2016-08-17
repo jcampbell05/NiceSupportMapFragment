@@ -17,7 +17,7 @@ Recommended for Android 2.3 and Above
 
 Original Fix which this Class is based upon -  https://github.com/jfeinstein10/SlidingMenu/issues/168
 
-Special thanks to to Gemerson Ribas (gmribas) and David Thompson (Pepsi1x1) for their help.
+Special thanks to to Gemerson Ribas (gmribas), Kai Eckardt (Servus7) and David Thompson (Pepsi1x1) for their help.
 
 Install
 -------

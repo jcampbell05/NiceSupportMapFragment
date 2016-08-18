@@ -1,4 +1,4 @@
-package com.jcampbell05.nicesupportmapfragment;
+package com.jamescampbell.nicesupportmapfragment;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

@@ -29,7 +29,7 @@ Install
         android:id="@+id/map"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="com.NYXDigital.NiceSupportMapFragment"/>
+        android:name="com.jamescampbell.nicesupportmapfragment"/>
 
 3. Replace all references to the Fragment in your code to use this class.
 
@@ -45,7 +45,7 @@ We also have support for allowing user's to vertical and horizontal pan a map wh
 License
 -------
 
-    Copyright 2013 Nyx Digital
+    Copyright 2016n James Campbell
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.

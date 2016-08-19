@@ -20,20 +20,20 @@ import com.google.android.gms.maps.SupportMapFragment;
 
 public class NiceSupportMapFragment extends SupportMapFragment {
 
-    private int detectedBestPixelFormat = -1;
-    private View drawingView;
-
     //Many thanks to Pepsi1x1 for his contribution to this Texture View detection flag
     private static final boolean HAS_TEXTURE_VIEW_SUPPORT = android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN;
     private static final boolean IS_RGBA_8888_BY_DEFAULT = android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1;
     private static final boolean SUPPORTS_TEXTURE_VIEW_BACKGROUND = android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.N;
 
     private boolean preventParentScrolling = true;
+    private int detectedBestPixelFormat = -1;
 
     private View searchAndFindDrawingView(ViewGroup group) {
         int childCount = group.getChildCount();
+
         for (int i = 0; i < childCount; i++) {
             View child = group.getChildAt(i);
+
             if (child instanceof ViewGroup) {
                 View view = searchAndFindDrawingView((ViewGroup) child);
 
@@ -43,19 +43,19 @@ public class NiceSupportMapFragment extends SupportMapFragment {
             }
 
             if (child instanceof SurfaceView) {
-                return (View) child;
+                return child;
             }
 
             if (HAS_TEXTURE_VIEW_SUPPORT) { // if we have support for texture view
                 if (child instanceof TextureView) {
-                    return (View) child;
+                    return child;
                 }
             }
         }
         return null;
     }
 
-    private int detectBestPixelFormat () {
+    private int detectBestPixelFormat() {
 
         //Skip check if this is a new device as it will be RGBA_8888 by default.
         if (IS_RGBA_8888_BY_DEFAULT) {
@@ -81,26 +81,24 @@ public class NiceSupportMapFragment extends SupportMapFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        ViewGroup view = (ViewGroup) super.onCreateView(inflater, container,
-            savedInstanceState);
-        drawingView = searchAndFindDrawingView(view); // Find the view the map
-        // is using for Open GL
+        ViewGroup view = (ViewGroup) super.onCreateView(inflater, container, savedInstanceState);
+
+        // Find the view the map is using for Open GL
+        View drawingView = searchAndFindDrawingView(view);
 
         if (SUPPORTS_TEXTURE_VIEW_BACKGROUND) {
-            //Transparent Color For Views, android.R.color.transparent dosn't work on all devices
-            int transparent =  0x00000000;
+            //Transparent Color For Views, android.R.color.transparent doesn't work on all devices
+            int transparent = 0x00000000;
 
-            view.setBackgroundColor(transparent); // Set Root View to be
-            // transparent
-            // to prevent black screen on
-            // load
+            // Set Root View to be transparent to prevent black screen on load
+            view.setBackgroundColor(transparent);
 
-            if (drawingView == null)
-                return view; // If we didn't get anything then abort
+            if (drawingView == null) { // If we didn't get anything then abort
+                return view;
+            }
 
-            drawingView.setBackgroundColor(transparent); // Stop black artifact from
-            // being left behind on
-            // scroll
+            // Stop black artifact from being left behind on scroll
+            drawingView.setBackgroundColor(transparent);
         }
 
         // Create On Touch Listener for MapView Parent Scrolling Fix - Many
@@ -111,19 +109,14 @@ public class NiceSupportMapFragment extends SupportMapFragment {
                 int action = event.getAction();
 
                 switch (action) {
-
                     case MotionEvent.ACTION_DOWN:
                         // Disallow Parent to intercept touch events.
-                        view.getParent().requestDisallowInterceptTouchEvent(
-                            preventParentScrolling);
+                        view.getParent().requestDisallowInterceptTouchEvent(preventParentScrolling);
                         break;
-
                     case MotionEvent.ACTION_UP:
                         // Allow Parent to intercept touch events.
-                        view.getParent().requestDisallowInterceptTouchEvent(
-                            !preventParentScrolling);
+                        view.getParent().requestDisallowInterceptTouchEvent(!preventParentScrolling);
                         break;
-
                 }
 
                 // Handle View touch events.
@@ -147,7 +140,6 @@ public class NiceSupportMapFragment extends SupportMapFragment {
 
                 return view;
             }
-
         }
 
         // Otherwise continue onto legacy surface view hack
@@ -156,7 +148,7 @@ public class NiceSupportMapFragment extends SupportMapFragment {
         // Fix for reducing black view flash issues
         SurfaceHolder holder = surfaceView.getHolder();
 
-        //Detect Display Format if we havn't already
+        //Detect Display Format if we haven't already
         if (detectedBestPixelFormat == -1) {
             detectedBestPixelFormat = detectBestPixelFormat();
         }
@@ -178,5 +170,4 @@ public class NiceSupportMapFragment extends SupportMapFragment {
     public void setPreventParentScrolling(boolean value) {
         preventParentScrolling = value;
     }
-
 }

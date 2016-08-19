@@ -32,10 +32,10 @@ public class NiceSupportMapFragment extends SupportMapFragment {
         int childCount = group.getChildCount();
 
         for (int i = 0; i < childCount; i++) {
-            View child = group.getChildAt(i);
+            final View child = group.getChildAt(i);
 
             if (child instanceof ViewGroup) {
-                View view = searchAndFindDrawingView((ViewGroup) child);
+                final View view = searchAndFindDrawingView((ViewGroup) child);
 
                 if (view != null) {
                     return view;
@@ -62,9 +62,9 @@ public class NiceSupportMapFragment extends SupportMapFragment {
             return PixelFormat.RGBA_8888;
         }
 
-        Context context = this.getActivity();
-        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        Display display = wm.getDefaultDisplay();
+        final Context context = this.getActivity();
+        final WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        final Display display = wm.getDefaultDisplay();
 
         //Get display pixel format
         @SuppressWarnings("deprecation")
@@ -81,10 +81,11 @@ public class NiceSupportMapFragment extends SupportMapFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        ViewGroup view = (ViewGroup) super.onCreateView(inflater, container, savedInstanceState);
+        final ViewGroup view = (ViewGroup) super.onCreateView(inflater, container,
+            savedInstanceState);
 
         // Find the view the map is using for Open GL
-        View drawingView = searchAndFindDrawingView(view);
+        final View drawingView = searchAndFindDrawingView(view);
 
         if (SUPPORTS_TEXTURE_VIEW_BACKGROUND) {
             //Transparent Color For Views, android.R.color.transparent doesn't work on all devices
@@ -103,7 +104,7 @@ public class NiceSupportMapFragment extends SupportMapFragment {
 
         // Create On Touch Listener for MapView Parent Scrolling Fix - Many
         // thanks to Gemerson Ribas (gmribas) for help with this fix.
-        OnTouchListener touchListener = new OnTouchListener() {
+        final OnTouchListener touchListener = new OnTouchListener() {
             public boolean onTouch(View view, MotionEvent event) {
 
                 int action = event.getAction();
@@ -131,8 +132,7 @@ public class NiceSupportMapFragment extends SupportMapFragment {
             // tweak it and return the fragment view
 
             if (drawingView instanceof TextureView) {
-
-                TextureView textureView = (TextureView) drawingView;
+                final TextureView textureView = (TextureView) drawingView;
 
                 // Stop Containing Views from moving when a user is interacting
                 // with Map View Directly
@@ -146,7 +146,7 @@ public class NiceSupportMapFragment extends SupportMapFragment {
         final SurfaceView surfaceView = (SurfaceView) drawingView;
 
         // Fix for reducing black view flash issues
-        SurfaceHolder holder = surfaceView.getHolder();
+        final SurfaceHolder holder = surfaceView.getHolder();
 
         //Detect Display Format if we haven't already
         if (detectedBestPixelFormat == -1) {

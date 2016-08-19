@@ -101,20 +101,16 @@ public class NiceSupportMapFragment extends SupportMapFragment {
             drawingView.setBackgroundColor(transparent);
         }
 
-        // texture view
-        if (HAS_TEXTURE_VIEW_SUPPORT) { // If we support texture view and the
-            // drawing view is a TextureView then
-            // tweak it and return the fragment view
+        // If we support texture view and the drawing view is a TextureView then tweak it and return
+        // the fragment view
+        if (HAS_TEXTURE_VIEW_SUPPORT && drawingView instanceof TextureView) {
+            final TextureView textureView = (TextureView) drawingView;
 
-            if (drawingView instanceof TextureView) {
-                final TextureView textureView = (TextureView) drawingView;
+            // Stop Containing Views from moving when a user is interacting
+            // with Map View Directly
+            textureView.setOnTouchListener(new OnTouchListener());
 
-                // Stop Containing Views from moving when a user is interacting
-                // with Map View Directly
-                textureView.setOnTouchListener(new OnTouchListener());
-
-                return view;
-            }
+            return view;
         }
 
         // Otherwise continue onto legacy surface view hack

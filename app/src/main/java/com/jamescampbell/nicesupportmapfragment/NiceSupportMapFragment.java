@@ -12,7 +12,6 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.TextureView;
 import android.view.View;
-import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 
@@ -102,30 +101,6 @@ public class NiceSupportMapFragment extends SupportMapFragment {
             drawingView.setBackgroundColor(transparent);
         }
 
-        // Create On Touch Listener for MapView Parent Scrolling Fix - Many
-        // thanks to Gemerson Ribas (gmribas) for help with this fix.
-        final OnTouchListener touchListener = new OnTouchListener() {
-            public boolean onTouch(View view, MotionEvent event) {
-
-                int action = event.getAction();
-
-                switch (action) {
-                    case MotionEvent.ACTION_DOWN:
-                        // Disallow Parent to intercept touch events.
-                        view.getParent().requestDisallowInterceptTouchEvent(preventParentScrolling);
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        // Allow Parent to intercept touch events.
-                        view.getParent().requestDisallowInterceptTouchEvent(!preventParentScrolling);
-                        break;
-                }
-
-                // Handle View touch events.
-                view.onTouchEvent(event);
-                return false;
-            }
-        };
-
         // texture view
         if (HAS_TEXTURE_VIEW_SUPPORT) { // If we support texture view and the
             // drawing view is a TextureView then
@@ -136,7 +111,7 @@ public class NiceSupportMapFragment extends SupportMapFragment {
 
                 // Stop Containing Views from moving when a user is interacting
                 // with Map View Directly
-                textureView.setOnTouchListener(touchListener);
+                textureView.setOnTouchListener(new OnTouchListener());
 
                 return view;
             }
@@ -158,7 +133,7 @@ public class NiceSupportMapFragment extends SupportMapFragment {
 
         // Stop Containing Views from moving when a user is interacting with
         // Map View Directly
-        surfaceView.setOnTouchListener(touchListener);
+        surfaceView.setOnTouchListener(new OnTouchListener());
 
         return view;
     }
@@ -169,5 +144,31 @@ public class NiceSupportMapFragment extends SupportMapFragment {
 
     public void setPreventParentScrolling(boolean value) {
         preventParentScrolling = value;
+    }
+
+    /**
+     * On Touch Listener for MapView Parent Scrolling Fix - Many thanks to Gemerson Ribas (gmribas)
+     * for help with this fix.
+     */
+    private final class OnTouchListener implements View.OnTouchListener {
+        public boolean onTouch(View view, MotionEvent event) {
+
+            int action = event.getAction();
+
+            switch (action) {
+                case MotionEvent.ACTION_DOWN:
+                    // Disallow Parent to intercept touch events.
+                    view.getParent().requestDisallowInterceptTouchEvent(preventParentScrolling);
+                    break;
+                case MotionEvent.ACTION_UP:
+                    // Allow Parent to intercept touch events.
+                    view.getParent().requestDisallowInterceptTouchEvent(!preventParentScrolling);
+                    break;
+            }
+
+            // Handle View touch events.
+            view.onTouchEvent(event);
+            return false;
+        }
     }
 }

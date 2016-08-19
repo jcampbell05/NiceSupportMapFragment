@@ -24,9 +24,9 @@ public class NiceSupportMapFragment extends SupportMapFragment {
     private View drawingView;
 
     //Many thanks to Pepsi1x1 for his contribution to this Texture View detection flag
-    private boolean hasTextureViewSupport = android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN;
-    private boolean isRGBA_8888ByDefault = android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1;
-    private boolean supportsTextureViewBackground = android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.N;
+    private static final boolean HAS_TEXTURE_VIEW_SUPPORT = android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN;
+    private static final boolean IS_RGBA_8888_BY_DEFAULT = android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1;
+    private static final boolean SUPPORTS_TEXTURE_VIEW_BACKGROUND = android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.N;
 
     private boolean preventParentScrolling = true;
 
@@ -46,7 +46,7 @@ public class NiceSupportMapFragment extends SupportMapFragment {
                 return (View) child;
             }
 
-            if (hasTextureViewSupport) { // if we have support for texture view
+            if (HAS_TEXTURE_VIEW_SUPPORT) { // if we have support for texture view
                 if (child instanceof TextureView) {
                     return (View) child;
                 }
@@ -58,7 +58,7 @@ public class NiceSupportMapFragment extends SupportMapFragment {
     private int detectBestPixelFormat () {
 
         //Skip check if this is a new device as it will be RGBA_8888 by default.
-        if (isRGBA_8888ByDefault) {
+        if (IS_RGBA_8888_BY_DEFAULT) {
             return PixelFormat.RGBA_8888;
         }
 
@@ -70,7 +70,7 @@ public class NiceSupportMapFragment extends SupportMapFragment {
         @SuppressWarnings("deprecation")
         int displayFormat = display.getPixelFormat();
 
-        if ( PixelFormat.formatHasAlpha(displayFormat) ) {
+        if (PixelFormat.formatHasAlpha(displayFormat)) {
             return displayFormat;
         } else {
             return PixelFormat.RGB_565;//Fallback for those who don't support Alpha
@@ -86,7 +86,7 @@ public class NiceSupportMapFragment extends SupportMapFragment {
         drawingView = searchAndFindDrawingView(view); // Find the view the map
         // is using for Open GL
 
-        if (supportsTextureViewBackground) {
+        if (SUPPORTS_TEXTURE_VIEW_BACKGROUND) {
             //Transparent Color For Views, android.R.color.transparent dosn't work on all devices
             int transparent =  0x00000000;
 
@@ -133,7 +133,7 @@ public class NiceSupportMapFragment extends SupportMapFragment {
         };
 
         // texture view
-        if (hasTextureViewSupport) { // If we support texture view and the
+        if (HAS_TEXTURE_VIEW_SUPPORT) { // If we support texture view and the
             // drawing view is a TextureView then
             // tweak it and return the fragment view
 

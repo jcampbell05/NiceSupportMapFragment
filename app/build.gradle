@@ -23,3 +23,16 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.google.android.gms:play-services-maps:9.4.0'
 }
+
+task deleteJar(type: Delete) {
+    delete '../lib/NiceSupportMapFragment.jar'
+}
+
+task createJar(type: Copy) {
+    from('build/intermediates/bundles/release')
+    into('../lib/')
+    include('classes.jar')
+    rename('classes.jar', 'NiceSupportMapFragment.jar')
+}
+
+createJar.dependsOn(deleteJar, build)
